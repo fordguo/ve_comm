@@ -123,15 +123,23 @@ def _live_info(ls, stage):
                 label = "直播回放"
             return (stage, label, message, channel.value)
         elif lbreak and lbreak.value.is_validate():
+            lmsg = lbreak.value.get("message")
+            llabel = lbreak.value.get("label")
             if stage == "pre":
-                label = "精彩抢先看"
-                message = "抢先看准备中"
+                if not llabel:
+                    label = "精彩抢先看"
+                if not lmsg:
+                    message = "抢先看准备中"
             elif stage == "live":
-                label = "进入直播"
-                message = "直播准备中"
+                if not llabel:
+                    label = "进入直播"
+                if not lmsg:
+                    message = "直播准备中"
             elif stage == "post":
-                label = "直播回放"
-                message = "回放准备中"
+                if not llabel:
+                    label = "直播回放"
+                if not lmsg:
+                    message = "回放准备中"
             return (stage, label, message, None)
 
     return (None, label, message, None)
