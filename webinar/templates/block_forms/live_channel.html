@@ -1,0 +1,60 @@
+<div class="{{ classname }} object">
+    <ul class="">
+        {% with child=children.start %}
+        <li class="field-col col6 required ">
+            {% if child.block.label %}
+                <label class="field__label" {% if child.id_for_label %}for="{{ child.id_for_label }}"{% endif %}>{{ child.block.label }}</label>
+            {% endif %}
+            {{ child.render_form }}
+        </li>
+        {% endwith %}
+        {% with child=children.end %}
+        <li class="field-col col6">
+            {% if child.block.label %}
+                <label class="field__label" {% if child.id_for_label %}for="{{ child.id_for_label }}"{% endif %}>{{ child.block.label }}</label>
+            {% endif %}
+            {{ child.render_form }}
+        </li>
+        {% endwith %}
+        {% with child=children.vendor %}
+        <li class="field-col col6 required ">
+            {% if child.block.label %}
+                <label class="field__label" {% if child.id_for_label %}for="{{ child.id_for_label }}"{% endif %}>{{ child.block.label }}</label>
+            {% endif %}
+            {{ child.render_form }}
+        </li>
+        {% endwith %}
+        {% with child=children.channel_type %}
+        <li class="field-col col6 required ">
+            {% if child.block.label %}
+                <label class="field__label" {% if child.id_for_label %}for="{{ child.id_for_label }}"{% endif %}>{{ child.block.label }}</label>
+            {% endif %}
+            {{ child.render_form }}
+        </li>
+        {% endwith %}
+        {% with child=children.cid %}
+        <li class="field-col col6 required ">
+            {% if child.block.label %}
+                <label class="field__label" {% if child.id_for_label %}for="{{ child.id_for_label }}"{% endif %}>{{ child.block.label }}</label>
+            {% endif %}
+            {{ child.render_form }}
+        </li>
+        {% endwith %}
+        {% with child=children.token %}
+        <li class="field-col col6 ">
+            {% if child.block.label %}
+                <label class="field__label" {% if child.id_for_label %}for="{{ child.id_for_label }}"{% endif %}>{{ child.block.label }}</label>
+            {% endif %}
+            {{ child.render_form }}
+        </li>
+        {% endwith %}
+        {% with child=children.wid %}
+        <li class="field-col col12">
+            {% if child.block.label %}
+                <label class="field__label" {% if child.id_for_label %}for="{{ child.id_for_label }}"{% endif %}>{{ child.block.label }}</label>
+            {% endif %}
+            {{ child.render_form }}
+        </li>
+        {% endwith %}
+    </ul>
+</div>

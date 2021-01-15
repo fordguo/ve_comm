@@ -1,0 +1,36 @@
+<div class="{{ classname }} object">
+    <ul class="">
+        {% with child=children.image %}
+        <li class="field-col col6 required ">
+            {% if child.block.label %}
+                <label class="field__label" {% if child.id_for_label %}for="{{ child.id_for_label }}"{% endif %}>{{ child.block.label }}</label>
+            {% endif %}
+            {{ child.render_form }}
+        </li>
+        {% endwith %}
+        {% with child=children.mobile_image %}
+        <li class="field-col col6 required ">
+            {% if child.block.label %}
+                <label class="field__label" {% if child.id_for_label %}for="{{ child.id_for_label }}"{% endif %}>{{ child.block.label }}</label>
+            {% endif %}
+            {{ child.render_form }}
+        </li>
+        {% endwith %}
+        {% with child=children.name %}
+        <li class="field-col col6 required my-row ">
+            {% if child.block.label %}
+                <label class="field__label" {% if child.id_for_label %}for="{{ child.id_for_label }}"{% endif %}>{{ child.block.label }}</label>
+            {% endif %}
+            {{ child.render_form }}
+        </li>
+        {% endwith %}
+        {% with child=children.url %}
+        <li class="field-col col6 required ">
+            {% if child.block.label %}
+                <label class="field__label" {% if child.id_for_label %}for="{{ child.id_for_label }}"{% endif %}>{{ child.block.label }}</label>
+            {% endif %}
+            {{ child.render_form }}
+        </li>
+        {% endwith %}
+    </ul>
+</div>

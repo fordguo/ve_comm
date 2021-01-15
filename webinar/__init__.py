@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -37,3 +38,18 @@ def get_user_channel_url(channel, user):
         elif channel.vendor == LiveVendor.GENSEE:
             return gensee.get_user_url(channel, user)
     return get_channel_url(channel)
+
+
+def oss_special_url(category, name, suffix, fmt='mp4'):
+    if suffix and suffix[0] != '_':
+        suffix = '_'+suffix
+    # http://oss.sapevent.cn/video/unplugged/001_Karlie & Alicia_1080p.mp4
+    return f"{settings.OSS_URL_PREFIX}/video/{category}/{name}{suffix}.{fmt}"
+
+
+def video_url(category, name, suffix='1080p'):
+    return oss_special_url(category, name, suffix)
+
+
+def thumbnail_url(category, name, suffix='pc'):
+    return oss_special_url(category, name, suffix, 'jpg')

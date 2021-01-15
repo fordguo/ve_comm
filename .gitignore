@@ -1,1 +1,4 @@
 .vscode
+manage.py
+ve_comm
+db.sqlite3
