@@ -6,7 +6,7 @@ setup(
     description='Virtual meeting common package',
     author='Ford Guo',
     author_email='agile.guo@qq.com',
-    packages=find_packages(include=['webinar']),
+    packages=find_packages(include=['webinar', 'ctools']),
     install_requires=[
         'django>=3.1',
         'wagtail>=2.11',
