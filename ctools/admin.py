@@ -59,7 +59,7 @@ class BatchEmailAdmin(EmailAdmin):
             template = datas["template"].name
             for d in dataset.dict:
                 mail_data = {'sender': datas['sender'], 'recipients': [d['email']],
-                             'template': template, 'context': d}
+                             'template': datas["template"], 'context': d}
                 send_mail_now(mail_data)
                 count += 1
             messages.add_message(request, messages.INFO,
