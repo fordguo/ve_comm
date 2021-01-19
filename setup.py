@@ -2,11 +2,11 @@ from setuptools import setup, find_packages
 
 setup(
     name='ve-comm',
-    version='0.1.0',
+    version='0.2.0',
     description='Virtual meeting common package',
     author='Ford Guo',
     author_email='agile.guo@qq.com',
-    packages=find_packages(include=['webinar', 'ctools']),
+    packages=find_packages(include=['webinar', 'ctools', 'cmedia']),
     install_requires=[
         'django>=3.1',
         'wagtail>=2.11',
