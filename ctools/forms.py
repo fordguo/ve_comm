@@ -9,4 +9,5 @@ class BatchEmailForm(ImportForm):
     sender = forms.CharField(
         widget=forms.TextInput(attrs={'size': '50'}),
         initial=settings.DEFAULT_FROM_EMAIL)
+    check_header = forms.BooleanField()
     field_order = ['template', 'import_file', 'input_format']
