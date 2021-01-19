@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='ve-comm',
-    version='0.2.2',
+    version='0.2.3',
     description='Virtual meeting common package',
     author='Ford Guo',
     author_email='agile.guo@qq.com',
