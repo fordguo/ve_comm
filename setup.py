@@ -9,6 +9,7 @@ setup(
     packages=find_packages(
         include=['webinar', 'webinar.*', 'ctools', 'ctools.*',
                  'cmedia', 'cmedia.=*']),
+    include_package_data=True,
     install_requires=[
         'django>=3.1',
         'wagtail>=2.11',
