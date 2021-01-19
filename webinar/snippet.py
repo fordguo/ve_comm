@@ -7,6 +7,7 @@ from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, StreamField
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.core.fields import StreamField
 
+from . import get_channel_url, get_user_channel_url, LiveVendor, ChannelType
 from .blocks import NameLiveBlock
 
 
@@ -51,3 +52,57 @@ class FloatImage(index.Indexed, models.Model):
     class Meta:
         verbose_name = _("Float Image")
         verbose_name_plural = _("Float Images")
+
+
+@register_snippet
+class MiniLiveChannel(models.Model):
+    vendor = models.CharField(
+        _("Live Vendor"), max_length=128, choices=LiveVendor.choices)
+    channel_type = models.CharField(
+        _("Channel Type"), max_length=16, choices=ChannelType.choices)
+    cid = models.CharField(_("Channel ID"), max_length=255, db_index=True)
+    wid = models.CharField(
+        _("Watch ID"), max_length=512, db_index=True, blank=True)
+    token = models.CharField(_("Token"), max_length=128, blank=True)
+
+    panels = [
+        MultiFieldPanel(
+            [
+                FieldPanel('vendor', classname="col6"),
+                FieldPanel('channel_type', classname="col6"),
+                FieldPanel('cid', classname="col6"),
+                FieldPanel('token', classname="col6"),
+                FieldPanel('wid', classname="col12"),
+            ],
+            heading=_("Base Info"),
+            classname="collapsible"
+        )
+    ]
+
+    def __str__(self):
+        return f'{self.cid}({self.get_vendor_display()}-{self.get_channel_type_display()})'
+
+    @property
+    def is_live(self):
+        return self.channel_type == ChannelType.LIVE
+
+    @property
+    def channel_url(self):
+        return get_channel_url(self)
+
+    def user_channel_url(self, user):
+        return get_user_channel_url(self, user)
+
+    @classmethod
+    def get_by_cid_or_wid(cls, cid, wid):
+        try:
+            if cid:
+                return cls.objects.get(cid=cid)
+            if wid:
+                return cls.objects.get(wid=wid)
+        except cls.DoesNotExist:
+            return None
+
+    class Meta:
+        verbose_name = _("Mini Live Channel")
+        verbose_name_plural = _("Mini Live Channels")
