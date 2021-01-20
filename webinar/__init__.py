@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from . import mudu, gensee
+from .vendor import mudu, gensee
 
 
 class LiveVendor(models.TextChoices):
@@ -13,8 +13,8 @@ class LiveVendor(models.TextChoices):
 
 
 class ChannelType(models.TextChoices):
-    LIVE = "live", _("Live")
-    DEMAND = "demand", _("Demand")
+    LIVE = "live", "Live"
+    DEMAND = "demand", "Demand"
 
 
 def get_channel_url(channel):
