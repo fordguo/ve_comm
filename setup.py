@@ -2,13 +2,13 @@ from setuptools import setup, find_packages
 
 setup(
     name='ve-comm',
-    version='0.2.8',
+    version='1.0.0',
     description='Virtual meeting common package',
     author='Ford Guo',
     author_email='agile.guo@qq.com',
     packages=find_packages(
         include=['webinar', 'webinar.*', 'ctools', 'ctools.*',
-                 'cmedia', 'cmedia.*']),
+                 'cmedia', 'cmedia.*', 'cpage', 'cpage.*']),
     include_package_data=True,
     install_requires=[
         'django>=3.1',
