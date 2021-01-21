@@ -6,7 +6,6 @@ from django.shortcuts import get_object_or_404
 from django.contrib.contenttypes.models import ContentType
 
 from . import get_user_channel_url
-from .snippet import FloatImage
 
 
 def ajax_required(original_function=None, *, method='GET', auth=True):
@@ -62,26 +61,3 @@ def get_live_info(request, content_type, pk, stream_attr, parent_block_type, par
             result["channel_url"] = get_user_channel_url(
                 channel.channel, request.user)
     return JsonResponse(result)
-
-
-@ajax_required(auth=False)
-def get_float_image(request, code):
-    img = get_object_or_404(FloatImage, code=code)
-    lives = []
-    for i in img.lives:
-        ninfo = {"name": i.value["name"]}
-        stage, label, message, channel = i.value["lives"].live_info()
-        live_info = dict(stage=stage, label=label, status="invalid",
-                         message=message, channel=channel)
-        if label:
-            live_info["status"] = "valid"
-        if channel:
-            live_info["channel_url"] = get_user_channel_url(
-                channel.channel, request.user)
-
-        ninfo["live"] = live_info
-        lives.append(ninfo)
-    return JsonResponse({
-        'image': img.image.file.url, 'image_mobile': img.image_mobile.file.url,
-        "id": img.id, "lives": lives, "url": img.url
-    })

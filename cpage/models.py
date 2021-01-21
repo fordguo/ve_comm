@@ -3,6 +3,8 @@ from django.shortcuts import redirect
 from django.db import models
 from django.core.cache import cache
 
+from .snippet import *
+
 from wagtail.core.models import Page
 from cmedia.models import BaseMediaInfo
 

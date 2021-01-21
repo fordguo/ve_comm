@@ -1,6 +1,7 @@
 from collections import namedtuple
 
 from django.utils import timezone
+from django.db import models
 from wagtail.core import blocks
 
 from . import ChannelType, LiveVendor, get_channel_url
@@ -10,14 +11,37 @@ LC = namedtuple("NamedLiveChannel", [
                 "cid", "wid", "vendor", "channel_type", "token"])
 
 
+class TimeStatus(models.TextChoices):
+    NOT_BEGIN = 'not_begin', "未开始"
+    RUNNING = 'running', "进行中"
+    ENDED = 'ended', "已结束"
+
+
+def time_delta_now(tm):
+    now = timezone.now()
+    return int((tm-now).total_seconds()), now
+
+
+def time_status(begin, end):
+    delta, now = time_delta_now(begin)
+    if delta > 0:
+        return TimeStatus.NOT_BEGIN
+    else:
+        if end is None or (end and now <= end):
+            return TimeStatus.RUNNING
+        else:
+            return TimeStatus.ENDED
+
+
 class LiveInfoStructValue(blocks.StructValue):
     def is_validate(self):
-        now = timezone.now()
-        end = self.get("end")
-        if end:
-            return now >= self.get("start") and now <= end
-        else:
-            return True
+        return self.time_status() == TimeStatus.RUNNING
+
+    def time_status(self):
+        return time_status(self.get("start"), self.get("end"))
+
+    def start_delta(self):
+        return time_delta_now(self.get("start"))[0]
 
 
 class LiveChannelStructValue(LiveInfoStructValue):
