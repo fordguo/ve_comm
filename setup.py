@@ -16,5 +16,6 @@ setup(
         'django-post_office>=3.4',
         'django-import-export>=2.4',
         'aliyun-python-sdk-dysmsapi>=1.0.0',
+        'pypinyin>=0.40',
     ],
 )
