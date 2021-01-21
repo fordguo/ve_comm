@@ -6,7 +6,7 @@ from django.shortcuts import render
 class AdaptiveTemplateMixin:
     def get_template_names(self):
         names = super().get_template_names()
-        if not self.request.user_agent.is_pc:
+        if self.request.user_agent.is_mobile:
             template = names[0]
             idx = template.rfind("/")
             if idx != -1:
