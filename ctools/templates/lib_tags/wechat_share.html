@@ -23,7 +23,7 @@
         var timestamp = new Date().getTime().toString();
         var fInitWeixin = function(d) {
             wx.config({
-                debug: {{wechat_debug}},
+                debug: {{wechat_debug|yesno:"true,false"}},
                 appId: '{{wechat_appid}}',
                 timestamp: timestamp,
                 nonceStr: noncestr,
