@@ -23,7 +23,7 @@ def check_wechat(request):
     return request.user_agent.is_wechat and not bool(request.session.get('openid'))
 
 
-with open(path.join(path.dirname(__file__), 'message_templates.json')) as f:
+with open(path.join(path.dirname(__file__), 'message_templates.json'), encoding="utf-8") as f:
     TEMPLATES = {t['template_id']: t for t in json.load(f)}
 if hasattr(settings, "WECHAT_TEMPLATES"):
     for t in settings.WECHAT_TEMPLATES:
