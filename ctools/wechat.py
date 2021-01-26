@@ -9,9 +9,6 @@ import requests
 from .models import WeixinMsgLog
 
 logger = logging.getLogger(__name__)
-APPID = settings.WECHAT_APPID
-APIKEY = settings.WECHAT_UCP_KEY
-BASEURL = settings.WECHAT_UCP_URL
 
 
 def redirect_wechat(request):
@@ -40,7 +37,7 @@ def send_msg(openid: str, template_id: str, data, link_url='', verify_templateid
         if verify_templateid and not settings.DEBUG and template_id not in TEMPLATES:
             logger.error(f'invalid template_id:{template_id}')
             return
-        url = f'{BASEURL}/cgi-bin/message/template/send?appid={APPID}&apikey={APIKEY}'
+        url = f'{settings.WECHAT_UCP_URL}/cgi-bin/message/template/send?appid={settings.WECHAT_APPID}&apikey={settings.WECHAT_UCP_KEY}'
         headers = {'Content-Type': 'application/json'}
         params = {'touser': openid, 'template_id': template_id,
                   'url': link_url, 'data': data}
