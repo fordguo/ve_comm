@@ -25,7 +25,7 @@ def check_wechat(request):
 
 with open(path.join(path.dirname(__file__), 'message_templates.json')) as f:
     TEMPLATES = {t['template_id']: t for t in json.load(f)}
-if getattr(settings, "WECHAT_TEMPLATES"):
+if hasattr(settings, "WECHAT_TEMPLATES"):
     for t in settings.WECHAT_TEMPLATES:
         TEMPLATES[t['template_id']] = t
 
