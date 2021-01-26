@@ -61,3 +61,25 @@ class OssVideoBlock(blocks.StructBlock):
     class Meta:
         icon = 'folder'
         value_class = OssStructValue
+
+
+class AgendaItem(blocks.StructBlock):
+    title = blocks.CharBlock(max_length=512)
+    description = blocks.RichTextBlock(required=False)
+    start = blocks.DateTimeBlock()
+    end = blocks.DateTimeBlock()
+    speakers = blocks.StreamBlock(
+        [("speaker", SpeakerBlock())], required=False)
+
+    class Meta:
+        icon = 'list-ol'
+        form_template = 'block_forms/agenda_item.html'
+
+
+class AgendaBlock(blocks.StructBlock):
+    name = blocks.CharBlock(max_length=64)
+    sub_name = blocks.CharBlock(max_length=128, required=False)
+    items = blocks.ListBlock(AgendaItem())
+
+    class Meta:
+        icon = 'date'

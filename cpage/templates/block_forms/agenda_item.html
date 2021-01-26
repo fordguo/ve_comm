@@ -1,0 +1,44 @@
+<div class="{{ classname }} object">
+    <ul class="">
+        {% with child=children.title %}
+        <li class="field-col col12 required my-row ">
+            {% if child.block.label %}
+                <label class="field__label" {% if child.id_for_label %}for="{{ child.id_for_label }}"{% endif %}>{{ child.block.label }}</label>
+            {% endif %}
+            {{ child.render_form }}
+        </li>
+        {% endwith %}
+        {% with child=children.start %}
+        <li class="field-col col6 required ">
+            {% if child.block.label %}
+                <label class="field__label" {% if child.id_for_label %}for="{{ child.id_for_label }}"{% endif %}>{{ child.block.label }}</label>
+            {% endif %}
+            {{ child.render_form }}
+        </li>
+        {% endwith %}
+        {% with child=children.end %}
+        <li class="field-col col6 required ">
+            {% if child.block.label %}
+                <label class="field__label" {% if child.id_for_label %}for="{{ child.id_for_label }}"{% endif %}>{{ child.block.label }}</label>
+            {% endif %}
+            {{ child.render_form }}
+        </li>
+        {% endwith %}
+        {% with child=children.description %}
+        <li class="field-col col12 required">
+            {% if child.block.label %}
+                <label class="field__label" {% if child.id_for_label %}for="{{ child.id_for_label }}"{% endif %}>{{ child.block.label }}</label>
+            {% endif %}
+            {{ child.render_form }}
+        </li>
+        {% endwith %}
+        {% with child=children.speakers %}
+        <li class="field-col col12 required ">
+            {% if child.block.label %}
+                <label class="field__label" {% if child.id_for_label %}for="{{ child.id_for_label }}"{% endif %}>{{ child.block.label }}</label>
+            {% endif %}
+            {{ child.render_form }}
+        </li>
+        {% endwith %}
+    </ul>
+</div>

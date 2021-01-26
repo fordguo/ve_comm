@@ -29,3 +29,12 @@ class ImportLog(models.Model):
     class Meta:
         verbose_name = "Import Log"
         verbose_name_plural = "Import Logs"
+
+
+class WeixinMsgLog(models.Model):
+    openid = models.CharField(max_length=32)
+    template = models.CharField(max_length=128)
+    url = models.CharField(max_length=1024, blank=True, null=True)
+    data = models.CharField(max_length=2048)
+    send_result = models.CharField(max_length=512)
+    created_at = models.DateTimeField(auto_now_add=True)

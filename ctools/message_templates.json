@@ -1,0 +1,18 @@
+[
+    {
+        "template_id": "BN4HK0RfAc-9CncoqbzTh4JX2PRNFJfO2c3ftgLbJnA",
+        "title": "会议通知",
+        "primary_industry": "IT科技",
+        "deputy_industry": "互联网|电子商务",
+        "content": "{{first.DATA}}\n会议名称：{{keyword1.DATA}}\n会议时间：{{keyword2.DATA}}\n会议地点：{{keyword3.DATA}}\n会议介绍：{{keyword4.DATA}}\n{{remark.DATA}}",
+        "example": "您有一个会议需要参加\r\n会议名称：研发部季度总结大会\r\n会议时间：2015年12月30日 9：30\r\n会议地点：汇合大厦3楼浩克会议厅\r\n会议介绍：1、回顾本季度研发情况\\n2、规划下一季度研发工作\r\n请准时到会，不要迟到"
+    },
+    {
+        "template_id": "mcgkr5JrL1awny3lTBTr1z_E2WfNIbTKvND-TaYe8Ew",
+        "title": "会议提醒",
+        "primary_industry": "IT科技",
+        "deputy_industry": "互联网|电子商务",
+        "content": "{{first.DATA}}\n时间：{{keyword1.DATA}}\n地点：{{keyword2.DATA}}\n{{remark.DATA}}",
+        "example": "xx 您好，您参与的会议即将召开，会议\n时间：2015年1月10日会议\n地点：上海国际会议中心请安排好您的时间，准时出席。\n\n"
+    }
+]

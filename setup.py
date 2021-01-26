@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='ve-comm',
-    version='1.2.5',
+    version='1.3.0',
     description='Virtual meeting common package',
     author='Ford Guo',
     author_email='agile.guo@qq.com',
@@ -17,5 +17,6 @@ setup(
         'django-import-export>=2.4',
         'aliyun-python-sdk-dysmsapi>=1.0.0',
         'pypinyin>=0.40',
+        'requests>=2.25'
     ],
 )

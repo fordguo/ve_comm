@@ -1,5 +1,17 @@
+from os import path
+import json
+import logging
 from django.conf import settings
 from django.shortcuts import redirect
+
+import requests
+
+from .models import WeixinMsgLog
+
+logger = logging.getLogger(__name__)
+APPID = settings.WECHAT_APPID
+APIKEY = settings.WECHAT_UCP_KEY
+BASEURL = settings.WECHAT_UCP_URL
 
 
 def redirect_wechat(request):
@@ -12,3 +24,36 @@ def redirect_wechat(request):
 
 def check_wechat(request):
     return request.user_agent.is_wechat and not bool(request.session.get('openid'))
+
+
+with open(path.join(path.dirname(__file__), 'message_templates.json')) as f:
+    TEMPLATES = {t['template_id']: t for t in json.load(f)}
+if getattr(settings, "WECHAT_TEMPLATES"):
+    for t in settings.WECHAT_TEMPLATES:
+        TEMPLATES[t['template_id']] = t
+
+
+def send_msg(openid: str, template_id: str, data, link_url='', verify_templateid=False):
+    # https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Template_Message_Interface.html
+
+    if openid and openid.strip() != '':
+        if verify_templateid and not settings.DEBUG and template_id not in TEMPLATES:
+            logger.error(f'invalid template_id:{template_id}')
+            return
+        url = f'{BASEURL}/cgi-bin/message/template/send?appid={APPID}&apikey={APIKEY}'
+        headers = {'Content-Type': 'application/json'}
+        params = {'touser': openid, 'template_id': template_id,
+                  'url': link_url, 'data': data}
+        res = requests.post(url=url, headers=headers, json=params)
+        if res.status_code == 200:
+            send_result = {'status': res.status_code, 'json': res.json()}
+        else:
+            send_result = {'status': res.status_code}
+        WeixinMsgLog.objects.create(
+            openid=openid, template=template_id,
+            url=link_url,
+            data=data, send_result=str(send_result)
+        )
+    else:
+        logger.error(
+            f'wrong arguments:openid={openid},template_id={template_id}')
