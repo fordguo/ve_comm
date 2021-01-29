@@ -1,7 +1,5 @@
 import os
-from urllib.parse import urlparse
 from django.core.management.base import BaseCommand
-from django.utils.text import Truncator
 from tablib import Dataset
 from ctools.wechat import send_msg
 
@@ -12,6 +10,10 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument('csv_file',  type=str)
         parser.add_argument('template', type=str)
+        parser.add_argument('--verify-template',
+                            default=True, action='store_true')
+        parser.add_argument('--no-verify-template',
+                            dest='verify-template', action='store_false')
 
     def _to_msg_data(self, data):
         msg_data = {}
@@ -23,18 +25,20 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         filename = options['csv_file']
         if not filename:
-            print('请输入CSV数据文件！')
+            self.stdout.write(self.style.ERROR('请输入CSV数据文件！'))
             exit(1)
         if not os.path.exists(filename):
-            print(f'{filename} 文件不存在！')
+            self.stdout.write(self.style.ERROR(f'{filename} 文件不存在！'))
             exit(1)
         template = options['template']
+        verify = options['verify-template']
         send_count = 0
         with open(filename, 'r', encoding='utf-8') as f:
             datas = Dataset().load(f, 'csv')
             for d in datas.dict:
                 openid = d['openid']
-                send_msg(openid, template, self._to_msg_data(d), d['url'])
+                send_msg(openid, template, self._to_msg_data(d),
+                         d['url'], verify_templateid=verify)
                 send_count += 1
 
         self.stdout.write(self.style.SUCCESS(f"微信模板消息发送数量:{send_count}"))
