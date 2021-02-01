@@ -40,7 +40,7 @@ class BaseSummitEnrollment(BaseMediaInfo):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f'{self.user.get_label_name()}({self.summit_code})'
+        return f'{self.user.get_full_name()}({self.summit_code})'
 
     class Meta:
         abstract = True
