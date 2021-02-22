@@ -40,7 +40,7 @@ def gen_gravatar(user):
     try:
         return get_avatar_url(user)
     except Exception:
-        return get_default_avatar(user.id, 'SS')
+        return get_default_avatar(user.id)
 
 
 # http://mudu.tv/watch/5920781
