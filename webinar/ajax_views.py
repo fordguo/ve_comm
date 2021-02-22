@@ -5,7 +5,7 @@ from django.http import JsonResponse, HttpResponseBadRequest, HttpResponseForbid
 from django.shortcuts import get_object_or_404
 from django.contrib.contenttypes.models import ContentType
 
-from . import get_user_channel_url
+from . import get_channel_url, get_user_channel_url
 
 
 def ajax_required(original_function=None, *, method='GET', auth=True):
@@ -58,6 +58,10 @@ def get_live_info(request, content_type, pk, stream_attr, parent_block_type, par
         if label:
             result["status"] = "valid"
         if channel:
-            result["channel_url"] = get_user_channel_url(
-                channel.channel, request.user)
+            if request.user.is_authenticated:
+                result["channel_url"] = get_user_channel_url(
+                    channel.channel, request.user)
+            else:
+                result["channel_url"] = get_channel_url(channel.channel)
+
     return JsonResponse(result)

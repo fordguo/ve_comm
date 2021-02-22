@@ -3,7 +3,7 @@
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 
-from webinar import get_user_channel_url
+from webinar import get_channel_url, get_user_channel_url
 from webinar.ajax_views import ajax_required
 from .snippet import FloatImage
 
@@ -20,8 +20,11 @@ def get_float_image(request, code):
         if label:
             live_info["status"] = "valid"
         if channel:
-            live_info["channel_url"] = get_user_channel_url(
-                channel.channel, request.user)
+            if request.user.is_authenticated:
+                live_info["channel_url"] = get_user_channel_url(
+                    channel.channel, request.user)
+            else:
+                live_info["channel_url"] = get_channel_url(channel.channel)
 
         ninfo["live"] = live_info
         lives.append(ninfo)
