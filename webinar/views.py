@@ -18,6 +18,9 @@ class MuduMixin:
             request.session[f"{MUDU_PREFIX}_channel_id"], request.session[f"{MUDU_PREFIX}_watch_id"])
         return live.get_user_channel_url(request.user)
 
+    def get_mudu_ids(self, request):
+        return request.session[f"{MUDU_PREFIX}_channel_id"], request.session[f"{MUDU_PREFIX}_watch_id"]
+
     def checkin_mudu(self, request):
         url = self.request.GET.get('notify_url')
         vid = self.request.GET.get('visitorId')
