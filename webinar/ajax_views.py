@@ -62,7 +62,7 @@ def get_live_info(request, content_type, pk, stream_attr, parent_block_type, par
             else:
                 result["channel_url"] = get_channel_url(channel.channel)
 
-    return JsonResponse(result)
+    return result
 
 
 @ajax_required(auth=False)
