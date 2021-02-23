@@ -43,9 +43,7 @@ def get_quick_url(request, params):
         return lives[0]['channel_url']
     elif qtype == 'live':
         res = get_live_info(request, *qparams)
-        lives = res['lives']
-        assert lives
-        return lives[0]['channel_url']
+        return res['channel_url']
     elif qtype == 'mudu':
         live = MiniLiveChannel.get_by_cid_or_wid(qparams[0], qparams[1])
         assert live
