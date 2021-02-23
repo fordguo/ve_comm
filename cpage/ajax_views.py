@@ -16,7 +16,7 @@ def get_float_image(request, code):
         ninfo = {"name": i.value["name"]}
         stage, label, message, channel = i.value["lives"].live_info()
         live_info = dict(stage=stage, label=label, status="invalid",
-                         message=message, channel=channel)
+                         message=message)
         if label:
             live_info["status"] = "valid"
         if channel:

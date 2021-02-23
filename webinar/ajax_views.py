@@ -53,8 +53,7 @@ def get_live_info(request, content_type, pk, stream_attr, parent_block_type, par
                              parent_block_type, parent_id)
     if info:
         stage, label, message, channel = info.value["lives"].live_info()
-        result.update(stage=stage, label=label,
-                      message=message, channel=channel)
+        result.update(stage=stage, label=label, message=message)
         if label:
             result["status"] = "valid"
         if channel:
