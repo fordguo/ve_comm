@@ -38,12 +38,12 @@ def get_quick_url(request, params):
     assert qtype
     if qtype == 'float':
         res = get_float_image(request, qparams[0])
-        lives = json.loads(res.content)['lives']
+        lives = res['lives']
         assert lives
         return lives[0]['channel_url']
     elif qtype == 'live':
         res = get_live_info(request, *qparams)
-        lives = json.loads(res.content)['lives']
+        lives = res['lives']
         assert lives
         return lives[0]['channel_url']
     elif qtype == 'mudu':
