@@ -37,7 +37,6 @@ def _check_live_block(stream_value, parent_block_type, parent_id):
             return _check_live_block(s, parent_block_type, parent_id)
 
 
-@ajax_required(auth=False)
 def get_live_info(request, content_type, pk, stream_attr, parent_block_type, parent_id):
     st = content_type.split(".")
     model_type = None
@@ -63,4 +62,11 @@ def get_live_info(request, content_type, pk, stream_attr, parent_block_type, par
             else:
                 result["channel_url"] = get_channel_url(channel.channel)
 
+    return JsonResponse(result)
+
+
+@ajax_required(auth=False)
+def ajax_get_live_info(request, content_type, pk, stream_attr, parent_block_type, parent_id):
+    result = get_live_info(request, content_type, pk,
+                           stream_attr, parent_block_type, parent_id)
     return JsonResponse(result)

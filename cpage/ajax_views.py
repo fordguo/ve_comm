@@ -8,7 +8,6 @@ from webinar.ajax_views import ajax_required
 from .snippet import FloatImage
 
 
-@ajax_required(auth=False)
 def get_float_image(request, code):
     img = get_object_or_404(FloatImage, code=code)
     lives = []
@@ -28,8 +27,14 @@ def get_float_image(request, code):
 
         ninfo["live"] = live_info
         lives.append(ninfo)
-    return JsonResponse({
+    return {
         'image': img.image.file.url, 'image_mobile': img.image_mobile.file.url,
         "id": img.id, "lives": lives, "url": img.url, 'time_status': img.time_status,
         'start_delta': img.start_delta
-    })
+    }
+
+
+@ajax_required(auth=False)
+def ajax_get_float_image(request, code):
+    result = get_float_image(request, code)
+    return JsonResponse(result)

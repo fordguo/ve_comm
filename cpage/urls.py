@@ -4,5 +4,5 @@ from . import ajax_views
 
 app_name = 'cpage'
 urlpatterns = [
-    path('ajax-float-image/<code>/', ajax_views.get_float_image),
+    path('ajax-float-image/<code>/', ajax_views.ajax_get_float_image),
 ]
