@@ -40,7 +40,7 @@ def get_quick_url(request, params):
         res = get_float_image(request, qparams[0])
         lives = res['lives']
         assert lives
-        return lives[0]['channel_url']
+        return lives[0]['live']['channel_url']
     elif qtype == 'live':
         res = get_live_info(request, *qparams)
         return res['channel_url']
