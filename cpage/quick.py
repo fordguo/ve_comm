@@ -36,6 +36,7 @@ def quick_mudu(cid, wid):
 def get_quick_url(request, params):
     qtype, qparams = parse_quick_params(params)
     assert qtype
+    qparams = [None if v is None or v == 'None' else v for v in qparams]
     if qtype == 'float':
         res = get_float_image(request, qparams[0])
         lives = res['lives']
