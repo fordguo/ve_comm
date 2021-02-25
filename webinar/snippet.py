@@ -48,7 +48,7 @@ class MiniLiveChannel(index.Indexed, models.Model):
     def channel_url(self):
         return get_channel_url(self)
 
-    def user_channel_url(self, user):
+    def get_user_channel_url(self, user):
         return get_user_channel_url(self, user)
 
     @classmethod
