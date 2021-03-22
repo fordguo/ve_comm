@@ -20,6 +20,7 @@
 
 - MATOMO_HOST
 - MATOMO_SITE_ID
+- MATOMO_MTM_JS
 
 ## 注意事项
 

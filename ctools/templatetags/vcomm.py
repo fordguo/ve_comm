@@ -21,6 +21,13 @@ def matomo_config():
     }
 
 
+@register.inclusion_tag('lib_tags/matomo_mtm.html')
+def matomo_mtm():
+    return {
+        "matomo_mtm_js": getattr(settings, "MATOMO_MTM_JS"),
+    }
+
+
 @register.inclusion_tag('lib_tags/wechat_share.html')
 def wechat_share_config(title, desc, link=None, image="default.png"):
     oss_root = getattr(settings, "OSS_URL_PREFIX")
