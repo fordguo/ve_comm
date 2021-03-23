@@ -24,7 +24,8 @@ def matomo_config():
 @register.inclusion_tag('lib_tags/matomo_mtm.html')
 def matomo_mtm():
     return {
-        "matomo_mtm_js": getattr(settings, "MATOMO_MTM_JS"),
+        "matomo_url": getattr(settings, "MATOMO_URL"),
+        "matomo_container": getattr(settings, "MATOMO_CONTAINER"),
     }
 
 
