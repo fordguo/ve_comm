@@ -13,16 +13,16 @@ def vstatic(path):
     return f'{url}?v={static_version}'
 
 
-@register.inclusion_tag('lib_tags/matomo.html')
-def matomo_config():
+@register.inclusion_tag('lib_tags/matomo.html', takes_context=True)
+def matomo_config(context):
     return {
         "matomo_host": getattr(settings, "MATOMO_HOST"),
         "matomo_site_id": getattr(settings, "MATOMO_SITE_ID"),
     }
 
 
-@register.inclusion_tag('lib_tags/matomo_mtm.html')
-def matomo_mtm():
+@register.inclusion_tag('lib_tags/matomo_mtm.html', takes_context=True)
+def matomo_mtm(context):
     return {
         "matomo_url": getattr(settings, "MATOMO_URL"),
         "matomo_container": getattr(settings, "MATOMO_CONTAINER"),

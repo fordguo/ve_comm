@@ -5,9 +5,7 @@
     _paq.push(['trackPageView']);
     _paq.push(['enableLinkTracking']);
     {% if user.is_authenticated %}_paq.push(['setUserId', '{{user.id}}']);{% endif %}
-    {% block extra_matomo %}
-        _paq.push(['enableHeartBeatTimer', 30]);
-    {% endblock %}
+    {% block extra_matomo %}_paq.push(['enableHeartBeatTimer', 30]);{% endblock %}
     (function() {
         var u="{{matomo_host}}";
         _paq.push(['setTrackerUrl', u+'piwik.php']);
