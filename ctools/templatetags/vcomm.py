@@ -18,6 +18,7 @@ def matomo_config(context):
     return {
         "matomo_host": getattr(settings, "MATOMO_HOST"),
         "matomo_site_id": getattr(settings, "MATOMO_SITE_ID"),
+        'user': context['user'],
     }
 
 
@@ -26,6 +27,7 @@ def matomo_mtm(context):
     return {
         "matomo_url": getattr(settings, "MATOMO_URL"),
         "matomo_container": getattr(settings, "MATOMO_CONTAINER"),
+        'user': context['user'],
     }
 
 
