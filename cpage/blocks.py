@@ -57,6 +57,7 @@ class OssVideoBlock(blocks.StructBlock):
     category = blocks.CharBlock(max_length=128)
     name = blocks.CharBlock(max_length=128)
     title = blocks.CharBlock(max_length=255, reqired=False)
+    description = blocks.RichTextBlock(required=False)
 
     class Meta:
         icon = 'folder'
