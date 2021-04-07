@@ -1,4 +1,3 @@
-from webinar.snippet import MiniLiveChannel
 from django.conf import settings
 from django.shortcuts import redirect
 from django.db import models
@@ -15,6 +14,7 @@ from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, FieldRowPanel, 
 from cmedia.models import BaseMediaInfo
 from cpage.blocks import SpeakerBlock
 from webinar.blocks import LiveBlock
+from webinar.snippet import BaseMiniLiveChannel
 
 from .snippet import *
 
@@ -90,7 +90,7 @@ class AdaptivePageMixin:
 
 
 class SummitAgenda(ClusterableModel, index.Indexed,  models.Model):
-    summit_app = models.CharField("峰会内部名", max_length=128)
+    summit_app = models.CharField("峰会内部名", max_length=128, db_index=True)
     name = models.CharField("内部名", max_length=128)
     title = models.CharField("议程名", max_length=255)
     sub_title = models.CharField("副议程名", max_length=255, blank=True)
@@ -167,8 +167,8 @@ class AgendaItem(Orderable):
         verbose_name_plural = "议程项"
 
 
-class SummitWebinar(MiniLiveChannel):
-    summit_app = models.CharField("峰会内部名", max_length=128)
+class SummitWebinar(BaseMiniLiveChannel):
+    summit_app = models.CharField("峰会内部名", max_length=128, db_index=True)
 
     panels = [
         FieldPanel('summit_app'),
@@ -188,3 +188,8 @@ class SummitWebinar(MiniLiveChannel):
     class Meta:
         verbose_name = "峰会直播间"
         verbose_name_plural = "峰会直播间"
+        unique_together = ['summit_app', 'cid', 'channel_type']
+        indexes = [
+            models.Index(fields=['summit_app', 'cid']),
+            models.Index(fields=['summit_app', 'wid'])
+        ]

@@ -8,8 +8,7 @@ from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel
 from . import get_channel_url, get_user_channel_url, LiveVendor, ChannelType
 
 
-@register_snippet
-class MiniLiveChannel(index.Indexed, models.Model):
+class BaseMiniLiveChannel(index.Indexed, models.Model):
     vendor = models.CharField(
         _("Live Vendor"), max_length=128, choices=LiveVendor.choices)
     channel_type = models.CharField(
@@ -61,6 +60,14 @@ class MiniLiveChannel(index.Indexed, models.Model):
         except cls.DoesNotExist:
             return None
 
+    class Meta:
+        abstract = True
+        verbose_name = _("Mini Live Channel")
+        verbose_name_plural = _("Mini Live Channels")
+
+
+@register_snippet
+class MiniLiveChannel(BaseMiniLiveChannel):
     class Meta:
         verbose_name = _("Mini Live Channel")
         verbose_name_plural = _("Mini Live Channels")
