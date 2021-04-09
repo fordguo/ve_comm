@@ -62,8 +62,6 @@ class BaseMiniLiveChannel(index.Indexed, models.Model):
 
     class Meta:
         abstract = True
-        verbose_name = _("Mini Live Channel")
-        verbose_name_plural = _("Mini Live Channels")
 
 
 @register_snippet
