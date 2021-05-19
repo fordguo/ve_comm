@@ -13,7 +13,7 @@ from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, FieldRowPanel, 
 
 from cmedia.models import BaseMediaInfo
 from cpage.blocks import SpeakerBlock
-from webinar.blocks import LiveBlock
+from webinar.blocks import NameLiveBlock
 from webinar.snippet import BaseMiniLiveChannel
 
 from .snippet import *
@@ -99,7 +99,7 @@ class SummitAgenda(ClusterableModel, index.Indexed,  models.Model):
     end = models.DateTimeField('结束', null=True, blank=True)
     webinars = StreamField(
         [
-            ('webinar', LiveBlock())
+            ('webinar', NameLiveBlock(label="会议直播")),
         ], verbose_name="直播", null=True, blank=True)
 
     panels = [
