@@ -5,8 +5,8 @@ from . import thumbnail_url, video_url
 
 
 class BannerImage(blocks.StructBlock):
-    image = ImageChooserBlock(label="Image")
-    mobile_image = ImageChooserBlock(label="Mobile Image")
+    image = ImageChooserBlock(label="Image", required=False)
+    mobile_image = ImageChooserBlock(label="Mobile Image", required=False)
     name = blocks.CharBlock(label="Name",
                             max_length=64, required=False)
     url = blocks.URLBlock(label="URL", required=False)
