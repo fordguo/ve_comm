@@ -1,8 +1,9 @@
+from django.conf import settings
 from pypinyin import pinyin, Style
 
 
 _DEFAULT_NAME = "SS"
-OSS_URL_PREFIX = "https://oss.sapevent.cn"
+OSS_URL_PREFIX = settings.OSS_URL_PREFIX
 
 
 def _check_black_name(name):
