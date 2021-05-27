@@ -19,7 +19,7 @@ class Command(BaseCommand):
         msg_data = {}
         for key, value in data.items():
             if key != 'openid' and key != 'url':
-                msg_data[key] = {'value': value}
+                msg_data[key] = {'value': value.replace('\\n', '\n')}
         return msg_data
 
     def handle(self, *args, **options):
