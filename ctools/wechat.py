@@ -1,8 +1,10 @@
 from os import path
 import json
 import logging
+from urllib.parse import quote
 from django.conf import settings
 from django.shortcuts import redirect
+
 
 import requests
 
@@ -20,7 +22,7 @@ def redirect_wechat(request):
     else:
         target = f"{settings.BASE_URL}{path_info}"
     # request.build_absolute_uri()
-    url = f'{settings.WECHAT_H5_URL}?appid={settings.WECHAT_APPID}&target={target}'
+    url = f'{settings.WECHAT_H5_URL}?appid={settings.WECHAT_APPID}&target={quote(target)}'
     print(url)
     return redirect(url)
 
