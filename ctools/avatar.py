@@ -1,6 +1,8 @@
 from django.conf import settings
 from pypinyin import pinyin, Style
 
+from . import isascii
+
 
 _DEFAULT_NAME = "SS"
 OSS_URL_PREFIX = settings.OSS_URL_PREFIX
@@ -34,7 +36,7 @@ def _avatar_name(first_name, last_name, email):
     if first_name and last_name:
         first = pinyin(first_name, style=Style.FIRST_LETTER)
         last = pinyin(last_name, style=Style.FIRST_LETTER)
-        if last_name.isalnum():
+        if isascii(last_name):
             return f"{first[0][0][0]}{last[0][0][0]}"
         else:
             return f"{last[0][0][0]}{first[0][0][0]}"
