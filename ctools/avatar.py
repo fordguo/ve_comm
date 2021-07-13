@@ -34,7 +34,10 @@ def _avatar_name(first_name, last_name, email):
     if first_name and last_name:
         first = pinyin(first_name, style=Style.FIRST_LETTER)
         last = pinyin(last_name, style=Style.FIRST_LETTER)
-        return f"{first[0][0][0]}{last[0][0][0]}"
+        if last_name.isascii():
+            return f"{first[0][0][0]}{last[0][0][0]}"
+        else:
+            return f"{last[0][0][0]}{first[0][0][0]}"
     elif first_name:
         first = pinyin(first_name, style=Style.FIRST_LETTER)
         return _check_single_name(first)
