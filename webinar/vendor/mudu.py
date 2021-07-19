@@ -6,10 +6,10 @@ from django.conf import settings
 from ctools.avatar import get_avatar_url, get_default_avatar
 
 # MUDU_ASSIGN_URL = "http://mudu.tv/activity.php?a=userAssign"
-MUDU_ASSIGN_URL = f"{settings.MUDU_ROOT}/activity.php?a=userAssign"
+MUDU_ASSIGN_URL = f"{getattr(settings,'MUDU_ROOT','')}/activity.php?a=userAssign"
 
 # http://mudu.tv/watch/5920781
-MUDU_WATCH_URL = f"{settings.MUDU_ROOT}/watch/"
+MUDU_WATCH_URL = f"{getattr(settings,'MUDU_ROOT','')}/watch/"
 
 
 def get_url(channel):

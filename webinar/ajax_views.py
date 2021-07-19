@@ -5,6 +5,7 @@ from django.http import JsonResponse, HttpResponseBadRequest, HttpResponseForbid
 from django.shortcuts import get_object_or_404
 from django.contrib.contenttypes.models import ContentType
 
+from .vendor import vhall
 from . import get_channel_url, get_user_channel_url
 
 
@@ -70,3 +71,15 @@ def ajax_get_live_info(request, content_type, pk, stream_attr, parent_block_type
     result = get_live_info(request, content_type, pk,
                            stream_attr, parent_block_type, parent_id)
     return JsonResponse(result)
+
+
+@ajax_required(auth=False, method='POST')
+def vhall_api_md5_sign(request):
+    return vhall.api_md5_sign(request.POST.copy())
+
+
+@ajax_required(auth=False, method='POST')
+def vhall_js_md5_sign(request):
+    fs = ['roomid', 'account', 'username']
+    params = {k: v for k, v in request.POST.items() if k in fs}
+    return vhall.js_md5_sign(params)

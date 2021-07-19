@@ -5,11 +5,12 @@ from .vendor import mudu, gensee
 
 
 class LiveVendor(models.TextChoices):
-    MUDU = "mudu", _("Mudu")
-    GENSEE = "gensee", _("Geensee")
-    EXT_URL = "ext_url", _("External URL")
-    SELF = "self", _("Self")
-    POLYV = "polyv", _("Polyv")
+    MUDU = "mudu", _("Mudu")  # 目睹
+    GENSEE = "gensee", _("Geensee")  # 263展视互动
+    EXT_URL = "ext_url", _("External URL")  # 外部链接
+    SELF = "self", _("Self")  # 会议平台
+    POLYV = "polyv", _("Polyv")  # 保利威
+    VHALL = "vhall", _("Vhall")  # 微吼
 
 
 class ChannelType(models.TextChoices):
