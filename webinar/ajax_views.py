@@ -75,11 +75,11 @@ def ajax_get_live_info(request, content_type, pk, stream_attr, parent_block_type
 
 @ajax_required(auth=False, method='POST')
 def vhall_api_md5_sign(request):
-    return vhall.api_md5_sign(request.POST.copy())
+    return JsonResponse(vhall.api_md5_sign(request.POST.copy()))
 
 
 @ajax_required(auth=False, method='POST')
 def vhall_js_md5_sign(request):
     fs = ['roomid', 'account', 'username']
     params = {k: v for k, v in request.POST.items() if k in fs}
-    return vhall.js_md5_sign(params)
+    return JsonResponse(vhall.js_md5_sign(params))
