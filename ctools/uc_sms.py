@@ -23,7 +23,7 @@ def china_mobiles(phones):
 def send_sms(phones, sign_code, template_code, verify=True, **params):
     phones = china_mobiles(phones)
     url = f"{ROOT_URL}msgService/sendMessageToMulti"
-    main = settings.UC['main']
+    main = settings.UC_SMS['main']
     classification = main['verifyKey'] if verify else main['notifKey']
     jdata = {"accessKey": main['accessKey'],
              "accessSecret": main['accessSecret'],
@@ -40,7 +40,7 @@ def send_sms(phones, sign_code, template_code, verify=True, **params):
 
 def send_internation_sms(phones, template_code, **params):
     url = f"{ROOT_URL}internationalMsg/sendMsgToMultiple"
-    inter = settings.UC['internation']
+    inter = settings.UC_SMS['internation']
     jdata = {"accessKey": inter['accessKey'],
              "accessSecret": inter['accessSecret'],
              "templateCode": template_code,
