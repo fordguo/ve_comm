@@ -8,9 +8,10 @@ from .models import SmsLog
 ROOT_URL = "https://market.juncdt.com/smartmarket/"
 
 
-def send_sms(phones, sign_code, template_code, classification, **params):
+def send_sms(phones, sign_code, template_code, verify=True, **params):
     url = f"{ROOT_URL}msgService/sendMessageToMulti"
     main = settings.UC['main']
+    classification = main['verify_key'] if verify else main['notifKey']
     jdata = {"accessKey": main['accessKey'],
              "accessSecret": main['accessSecret'],
              "classificationSecret": classification,
