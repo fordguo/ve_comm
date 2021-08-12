@@ -8,7 +8,20 @@ from .models import SmsLog
 ROOT_URL = "https://market.juncdt.com/smartmarket/"
 
 
+def china_mobiles(phones):
+    res = []
+    for p in phones:
+        if p.startswith('86'):
+            res.append(p[2:])
+        elif p.startswith('+86'):
+            res.append(p[3:])
+        else:
+            res.append(p)
+    return res
+
+
 def send_sms(phones, sign_code, template_code, verify=True, **params):
+    phones = china_mobiles(phones)
     url = f"{ROOT_URL}msgService/sendMessageToMulti"
     main = settings.UC['main']
     classification = main['verifyKey'] if verify else main['notifKey']
