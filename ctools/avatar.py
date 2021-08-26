@@ -5,7 +5,7 @@ from . import isascii
 
 
 _DEFAULT_NAME = "SS"
-OSS_URL_PREFIX = settings.OSS_URL_PREFIX
+OSS_URL_PREFIX = f"{getattr(settings,'OSS_URL_PREFIX','')}"
 
 
 def _check_black_name(name):
