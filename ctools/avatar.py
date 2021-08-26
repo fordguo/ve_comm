@@ -1,3 +1,7 @@
+import base64
+from ve_comm.settings import AVATAR
+import oss2
+
 from django.conf import settings
 from pypinyin import pinyin, Style
 
@@ -6,6 +10,15 @@ from . import isascii
 
 _DEFAULT_NAME = "SS"
 OSS_URL_PREFIX = f"{getattr(settings,'OSS_URL_PREFIX','')}"
+
+DEF_AVATAR = {
+    'default': {
+        'bg_images': ['blue.png', 'orange.png', 'pink.png'],
+        'style_fmt': 'image/watermark,text_{},type_ZmFuZ3poZW5naGVpdGk,color_FFFFFF,size_30,g_center,x_10,y_10,image/resize,w_32,h_32'
+    }
+}
+
+AVATAR = getattr(settings, 'AVATAR', DEF_AVATAR)
 
 
 def _check_black_name(name):
@@ -55,14 +68,40 @@ def _avatar_name(first_name, last_name, email):
     return _DEFAULT_NAME
 
 
-def get_avatar_url(user):
+def get_avatar_url(user, theme='default'):
+    count = len(AVATAR[theme]['bg_images'])
     name = _avatar_name(user.first_name, user.last_name, user.email)
     name = _check_black_name(name)
-    return f'{OSS_URL_PREFIX}/avatar/{name.upper()}_{user.id % 3}.png'
+    return f'{OSS_URL_PREFIX}/avatar/{theme}/{name.upper()}_{user.id % count}.png'
 
 
-def get_default_avatar(user_id):
-    return f'{OSS_URL_PREFIX}/avatar/{_DEFAULT_NAME}_{user_id % 3}.png'
+def get_default_avatar(user_id, theme='default'):
+    count = len(AVATAR[theme]['bg_images'])
+    return f'{OSS_URL_PREFIX}/avatar/{theme}/{_DEFAULT_NAME}_{user_id % count}.png'
+
+
+def gen_avatar(bucket, name, theme='default'):
+    style = AVATAR[theme]['style_fmt']
+    bg_images = AVATAR[theme]['bg_images']
+    bucket_name = settings.OSS_BUCKET_NAME
+    encode_text = base64.urlsafe_b64encode(oss2.compat.to_bytes(name))
+    style = style.format(encode_text.decode('ascii').strip('='))
+    for i in range(len(bg_images)):
+        target_image_name = f'avatar/{theme}/{name}_{i}.png'
+        osstname = oss2.compat.to_string(base64.urlsafe_b64encode(
+            oss2.compat.to_bytes(target_image_name)))
+        ossbname = oss2.compat.to_string(base64.urlsafe_b64encode(
+            oss2.compat.to_bytes(bucket_name)))
+        process = f"{style}|sys/saveas,o_{osstname},b_{ossbname}"
+        bucket.process_object(f'avatar/{theme}/bg/' + bg_images[i], process)
+
+
+def get_bucket():
+    auth = oss2.Auth(settings.OSS_ACCESS_KEY_ID,
+                     settings.OSS_ACCESS_KEY_SECRET)
+    bucket = oss2.Bucket(auth, settings.OSS_ENDPOINT,
+                         settings.OSS_BUCKET_NAME)
+    return bucket
 
 
 if __name__ == "__main__":
