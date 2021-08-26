@@ -36,6 +36,6 @@
 目前默认支持简体中文、繁体中文和英文
 
 - 创建/更新PO文件
-`python manage.py makemessages -l en -l zh_Hans -l zh_Hant`
+`python manage.py makemessages -l en -l zh_Hans -l zh_Hant -e py`
 - 编译PO文件
 `python manage.py compilemessages`

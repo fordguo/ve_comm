@@ -1,0 +1,74 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-08-26 07:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: webinar/__init__.py:8
+msgid "Mudu"
+msgstr ""
+
+#: webinar/__init__.py:9
+msgid "Geensee"
+msgstr ""
+
+#: webinar/__init__.py:10
+msgid "External URL"
+msgstr ""
+
+#: webinar/__init__.py:11
+msgid "Self"
+msgstr ""
+
+#: webinar/__init__.py:12
+msgid "Polyv"
+msgstr ""
+
+#: webinar/__init__.py:13
+msgid "Vhall"
+msgstr ""
+
+#: webinar/snippet.py:13
+msgid "Live Vendor"
+msgstr ""
+
+#: webinar/snippet.py:15
+msgid "Channel Type"
+msgstr ""
+
+#: webinar/snippet.py:16
+msgid "Channel ID"
+msgstr ""
+
+#: webinar/snippet.py:18
+msgid "Watch ID"
+msgstr ""
+
+#: webinar/snippet.py:19
+msgid "Token"
+msgstr ""
+
+#: webinar/snippet.py:30
+msgid "Base Info"
+msgstr ""
+
+#: webinar/snippet.py:70
+msgid "Mini Live Channel"
+msgstr ""
+
+#: webinar/snippet.py:71
+msgid "Mini Live Channels"
+msgstr ""
