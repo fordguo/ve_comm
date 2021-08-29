@@ -1,5 +1,4 @@
 import base64
-from ve_comm.settings import AVATAR
 import oss2
 
 from django.conf import settings
