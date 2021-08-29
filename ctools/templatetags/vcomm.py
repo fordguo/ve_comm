@@ -46,3 +46,22 @@ def wechat_share_config(title, desc, link=None, image="default.png"):
         "share_image": f'{oss_root}/wechat_share/{image}',
         "noncestr": f've-{datetime.now().timestamp()}',
     }
+
+
+@register.inclusion_tag('lib_tags/wechat_comm_share.html')
+def wechat_comm_share(title, desc, image=None, link=None):
+    oss_root = getattr(settings, "OSS_URL_PREFIX")
+    if not image:
+        image = f'{oss_root}/wechat_share/default.png'
+    return {
+        "wechat_appid": getattr(settings, "WECHAT_APPID"),
+        "wechat_sid": getattr(settings, "WECHAT_SID"),
+        "wechat_debug": bool(getattr(settings, "WECHAT_SHARE_DEBUG", False)),
+        "wechat_signature_url": getattr(settings, "WECHAT_SIGNATURE_URL"),
+        "wechat_h5_url": getattr(settings, "WECHAT_H5_URL"),
+        "share_title": title,
+        "share_desc": desc,
+        "share_link": link or getattr(settings, "WECHAT_DEFAULT_LINK"),
+        "share_image": image,
+        "noncestr": f've-{datetime.now().timestamp()}',
+    }

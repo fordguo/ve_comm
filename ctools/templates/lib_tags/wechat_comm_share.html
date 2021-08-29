@@ -1,0 +1,95 @@
+<!-- WeChat Share -->
+<script type="text/javascript" src="https://res2.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+<script type="text/javascript">
+    $().ready(function() {
+    {% if share_title %}
+        {% block wechat_share_options %}
+        var imgUrl = '{{share_image}}';
+        var shareOptions = {
+            title: '{{share_title}}',
+            desc: '{{share_desc}}',
+            link: '{{share_link}}',
+            imgUrl: imgUrl,
+            success: function (res) { 
+                // 分享成功
+                console.log('share success: ', res);
+            },
+            cancel: function (res) { 
+                // 用户取消分享
+                console.log('share cancel: ', res);
+            }
+        };
+        {% endblock %}
+    {% endif %}
+    var noncestr = "{{noncestr}}";
+    var timestamp = new Date().getTime().toString();
+    var fInitWeixin = function(d) {
+        {% block wechat_config_options %}
+        wx.config({
+            debug: {{wechat_debug|yesno:"true,false"}},
+            appId: '{{wechat_appid}}',
+            timestamp: timestamp,
+            nonceStr: noncestr,
+            signature: d.signature,
+            jsApiList: [
+                'checkJsApi',
+                'updateAppMessageShareData', 'updateTimelineShareData',
+                'hideMenuItems','showMenuItems',
+                'hideAllNonBaseMenuItem','showAllNonBaseMenuItem'
+            ]
+        });
+        {% endblock %}
+        {% block wechat_ready_options %}
+            wx.ready(function () {
+            {% if share_title %}
+                wx.checkJsApi({
+                    jsApiList: ['updateAppMessageShareData', 'updateTimelineShareData'],
+                    success: function(res) {
+                        // 以键值对的形式返回，可用的api值true，不可用为false
+                        // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
+                        console.log('checkJsApi: ', res);
+                        if (res.checkResult) {
+                            if (res.checkResult.updateTimelineShareData && res.checkResult.updateTimelineShareData != "no") {
+                                wx.updateTimelineShareData(shareOptions);
+                            }
+                            if (res.checkResult.updateAppMessageShareData && res.checkResult.updateAppMessageShareData != "no") {
+                                wx.updateAppMessageShareData(shareOptions);
+                            }
+                        }
+                    }
+                });
+            });
+            {% else %}
+                wx.checkJsApi({
+                    jsApiList: ['hideMenuItems', 'hideAllNonBaseMenuItem'],
+                    success: function(res) {
+                        // 以键值对的形式返回，可用的api值true，不可用为false
+                        // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
+                        console.log('checkJsApi: ', res);
+                        if (res.checkResult) {
+                            if (res.checkResult.hideMenuItems && res.checkResult.hideMenuItems != "no") {
+                                wx.hideMenuItems({
+                                    // 要隐藏的菜单项，只能隐藏“传播类”和“保护类”按钮，所有menu项见附录3
+                                    menuList: ['menuItem:share:appMessage','menuItem:share:timeline','menuItem:share:qq','menuItem:share:weiboApp','menuItem:share:facebook','menuItem:share:QZone'] 
+                                });                                
+                            }
+                        }
+                    }
+                });
+            });
+            {% endif %}
+        }
+        {% endblock %}
+        $.ajax({
+            type: 'get',
+            url: '{{wechat_signature_url}}',
+            dataType: 'json',
+            data: {sid: '{{wechat_sid}}', noncestr: noncestr, timestamp: timestamp, url: location.href},
+            success: function(d) {
+                console.log('signaure: ', d);
+                fInitWeixin(d);
+            }
+        })
+    });
+</script>
+<!-- End WeChat Share Code -->
