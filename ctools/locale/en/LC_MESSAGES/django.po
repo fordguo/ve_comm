@@ -17,39 +17,30 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-#: cpage/snippet.py:15
-msgid "Float Code"
+#: ctools/apps.py:8
+msgid "Common Tools"
 msgstr ""
 
-#: cpage/snippet.py:17
-msgid "Image"
+#: ctools/models.py:17
+msgid "SMS Log"
 msgstr ""
 
-#: cpage/snippet.py:22
-msgid "Mobile Image"
+#: ctools/models.py:18
+msgid "SMS Logs"
 msgstr ""
 
-#: cpage/snippet.py:28
-msgid "Float URL"
+#: ctools/models.py:35
+msgid "Import Log"
 msgstr ""
 
-#: cpage/snippet.py:29
-msgid "Meeting Live"
+#: ctools/models.py:36
+msgid "Import Logs"
 msgstr ""
 
-#: cpage/snippet.py:30
-msgid "Lives"
+#: ctools/models.py:48
+msgid "Wechat Log"
 msgstr ""
 
-#: cpage/snippet.py:43
-msgid "Base Info"
-msgstr ""
-
-#: cpage/snippet.py:64
-msgid "Float Image"
-msgstr ""
-
-#: cpage/snippet.py:65
-msgid "Float Images"
+#: ctools/models.py:49
+msgid "Wechat Logs"
 msgstr ""

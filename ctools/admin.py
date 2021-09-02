@@ -10,7 +10,7 @@ from import_export.formats.base_formats import DEFAULT_FORMATS
 from post_office.admin import EmailAdmin
 
 
-from .models import BatchEmail, ImportLog
+from .models import BatchEmail, ImportLog, SmsLog, WechatMsgLog
 
 
 class NoAddDeleteMixin:
@@ -69,5 +69,21 @@ class BatchEmailAdmin(EmailAdmin):
         return TemplateResponse(request, [self.batch_template_name], context)
 
 
+class SmsLogAdmin(ReadOnlyAdminMixin, admin.ModelAdmin):
+    list_display = ('phones', 'template', 'sign_name',
+                    'send_result', 'created_at')
+    search_fields = ['phones', 'template']
+    date_hierarchy = 'created_at'
+
+
+class WechatLogAdmin(ReadOnlyAdminMixin, admin.ModelAdmin):
+    list_display = ('openid', 'template', 'url',
+                    'send_result', 'created_at')
+    search_fields = ['openid', 'template']
+    date_hierarchy = 'created_at'
+
+
 admin.site.register(ImportLog, ImportLogAdmin)
 admin.site.register(BatchEmail, BatchEmailAdmin)
+admin.site.register(SmsLog, SmsLogAdmin)
+admin.site.register(WechatMsgLog, WechatLogAdmin)

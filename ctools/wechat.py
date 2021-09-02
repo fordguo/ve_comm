@@ -8,7 +8,7 @@ from django.shortcuts import redirect
 
 import requests
 
-from .models import WeixinMsgLog
+from .models import WechatMsgLog
 
 logger = logging.getLogger(__name__)
 
@@ -54,7 +54,7 @@ def send_msg(openid: str, template_id: str, data, link_url='', verify_templateid
             send_result = {'status': res.status_code, 'json': res.json()}
         else:
             send_result = {'status': res.status_code}
-        WeixinMsgLog.objects.create(
+        WechatMsgLog.objects.create(
             openid=openid, template=template_id,
             url=link_url,
             data=data, send_result=str(send_result)

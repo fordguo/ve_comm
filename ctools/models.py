@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 from post_office.models import Email
 
@@ -11,6 +12,10 @@ class SmsLog(models.Model):
     sign_name = models.CharField(max_length=128)
     send_result = models.CharField(max_length=512)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = _("SMS Log")
+        verbose_name_plural = _("SMS Logs")
 
 
 class BatchEmail(Email):
@@ -27,14 +32,18 @@ class ImportLog(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        verbose_name = "Import Log"
-        verbose_name_plural = "Import Logs"
+        verbose_name = _("Import Log")
+        verbose_name_plural = _("Import Logs")
 
 
-class WeixinMsgLog(models.Model):
+class WechatMsgLog(models.Model):
     openid = models.CharField(max_length=32)
     template = models.CharField(max_length=128)
     url = models.CharField(max_length=1024, blank=True, null=True)
     data = models.CharField(max_length=2048)
     send_result = models.CharField(max_length=512)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = _("Wechat Log")
+        verbose_name_plural = _("Wechat Logs")
