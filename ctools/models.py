@@ -21,6 +21,8 @@ class SmsLog(models.Model):
 class BatchEmail(Email):
     class Meta:
         proxy = True
+        # verbose_name = _("Batch Email")
+        # verbose_name_plural = _("Batch Email")
 
 
 class ImportLog(models.Model):
