@@ -49,3 +49,18 @@ class WechatMsgLog(models.Model):
     class Meta:
         verbose_name = _("Wechat Log")
         verbose_name_plural = _("Wechat Logs")
+
+
+class MobileLocation(models.Model):
+    num = models.PositiveBigIntegerField("号段", unique=True)
+    province = models.CharField("省", max_length=64)
+    city = models.CharField("市", max_length=128)
+    isp = models.CharField("运营商", max_length=64, blank=True)
+    area_code = models.CharField("区域编码", max_length=64, blank=True)
+    city_code = models.CharField("区号", max_length=64, blank=True)
+    zip_code = models.CharField("邮政编码", max_length=64, blank=True)
+    types = models.CharField("类型", max_length=64, blank=True)
+
+    class Meta:
+        verbose_name = _("Mobile Location")
+        verbose_name_plural = _("Mobile Locations")
