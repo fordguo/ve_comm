@@ -11,15 +11,16 @@ def query_mobile_location(mobile):
     mlen = len(mobile)
     num = 0
     if mlen == 11:
-        num = int(mobile[0:8])
+        num = int(mobile[0:7])
     elif mlen == 13:
-        num = int(mobile[2:10])
+        num = int(mobile[2:9])
     elif mlen == 14:
-        num = int(mobile[3:11])
+        num = int(mobile[3:10])
     else:
         logger.error(f"wrong mobile{mobile}")
         return None
     try:
+        print(num)
         return MobileLocation.objects.get(num=num)
     except MobileLocation.DoesNotExist:
         url = "https://hcapi02.api.bdymkt.com/mobile"
@@ -29,9 +30,7 @@ def query_mobile_location(mobile):
             "X-Bce-Signature": f"AppCode/{settings.BD_API['MOBILE_LOCATION']['APP_CODE']}"
         }
         resp = requests.get(url, params=params, headers=headers, verify=False)
-        print(resp.text)
         resj = resp.json()
-        print(resj)
         if resj["code"] == 200:
             data = resj['data']
             ml = MobileLocation.objects.create(
