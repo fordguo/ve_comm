@@ -22,7 +22,6 @@ def query_mobile_location(mobile):
         logger.error(f"wrong mobile{mobile}")
         return None
     try:
-        print(num)
         return MobileLocation.objects.get(num=num)
     except MobileLocation.DoesNotExist:
         url = "https://hcapi02.api.bdymkt.com/mobile"
