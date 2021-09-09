@@ -14,8 +14,10 @@ def query_mobile_location(mobile):
         num = int(mobile[0:7])
     elif mlen == 13:
         num = int(mobile[2:9])
+        mobile = mobile[2:]
     elif mlen == 14:
         num = int(mobile[3:10])
+        mobile = mobile[3:]
     else:
         logger.error(f"wrong mobile{mobile}")
         return None
