@@ -17,7 +17,7 @@ def query_mobile_location(mobile):
     if mlen == 11 and mobile[0] == '1':
         num = int(mobile[0:7])
     else:
-        logger.error(f"wrong mobile{mobile}")
+        logger.error(f"wrong mobile:{mobile}")
         return None
     try:
         return MobileLocation.objects.get(num=num)
