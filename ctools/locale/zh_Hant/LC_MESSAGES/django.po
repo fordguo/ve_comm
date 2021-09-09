@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-02 02:22+0000\n"
+"POT-Creation-Date: 2021-09-09 06:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
 #: ctools/apps.py:8
 msgid "Common Tools"
 msgstr ""
@@ -29,18 +30,26 @@ msgstr ""
 msgid "SMS Logs"
 msgstr ""
 
-#: ctools/models.py:35
+#: ctools/models.py:37
 msgid "Import Log"
 msgstr ""
 
-#: ctools/models.py:36
+#: ctools/models.py:38
 msgid "Import Logs"
 msgstr ""
 
-#: ctools/models.py:48
+#: ctools/models.py:50
 msgid "Wechat Log"
 msgstr ""
 
-#: ctools/models.py:49
+#: ctools/models.py:51
 msgid "Wechat Logs"
+msgstr ""
+
+#: ctools/models.py:65
+msgid "Mobile Location"
+msgstr ""
+
+#: ctools/models.py:66
+msgid "Mobile Locations"
 msgstr ""

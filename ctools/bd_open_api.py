@@ -8,16 +8,14 @@ logger = logging.getLogger(__name__)
 
 
 def query_mobile_location(mobile):
+    if mobile.startswith("86"):
+        mobile = mobile[2:]
+    elif mobile.startswith("+86"):
+        mobile = mobile[3:]
     mlen = len(mobile)
     num = 0
-    if mlen == 11:
+    if mlen == 11 and mobile[0] == '1':
         num = int(mobile[0:7])
-    elif mlen == 13:
-        num = int(mobile[2:9])
-        mobile = mobile[2:]
-    elif mlen == 14:
-        num = int(mobile[3:10])
-        mobile = mobile[3:]
     else:
         logger.error(f"wrong mobile{mobile}")
         return None

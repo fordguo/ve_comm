@@ -1,7 +1,7 @@
 import json
 from import_export import resources, exceptions
 
-from .models import ImportLog
+from .models import ImportLog, MobileLocation
 
 
 def print_result_error(result):
@@ -75,3 +75,21 @@ class LogMixin:
                                      file_name=kwargs.get('file_name'),
                                      resource_cls=str(self.__class__),
                                      totals=json.dumps(result.totals))
+
+
+class MobileLocationResource(PartHeaderMixin, LogMixin, resources.ModelResource):
+    field2header_tuple = (("num", "num"), ("province", "province"), ("city", "city"),
+                          ("isp", "isp"), ("area_code", "area_code"),
+                          ("city_code", "city_code"), ("zip_code", "zip_code"),
+                          ("types", "types")
+                          )
+
+    def skip_row(self, instance, original):
+        return int(instance.num) == int(original.num)
+        # return super().skip_row(instance, original)
+
+    class Meta:
+        model = MobileLocation
+        fields = ('num', 'province', 'city', 'isp',
+                  'area_code', 'city_code', 'zip_code', 'types')
+        import_id_fields = ('num',)

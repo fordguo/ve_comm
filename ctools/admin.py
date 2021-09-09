@@ -1,3 +1,4 @@
+from ctools.data_resources import MobileLocationResource
 from .post_email import send_mail_now
 from .forms import BatchEmailForm
 from django.contrib import admin
@@ -7,10 +8,11 @@ from django.contrib import messages
 from django.shortcuts import redirect
 
 from import_export.formats.base_formats import DEFAULT_FORMATS
+from import_export.admin import ImportExportMixin
 from post_office.admin import EmailAdmin
 
 
-from .models import BatchEmail, ImportLog, SmsLog, WechatMsgLog
+from .models import BatchEmail, ImportLog, MobileLocation, SmsLog, WechatMsgLog
 
 
 class NoAddDeleteMixin:
@@ -83,7 +85,14 @@ class WechatLogAdmin(ReadOnlyAdminMixin, admin.ModelAdmin):
     date_hierarchy = 'created_at'
 
 
+class MobileLocationAdmin(ImportExportMixin, ReadOnlyAdminMixin, admin.ModelAdmin):
+    resource_class = MobileLocationResource
+    list_display = ('num', 'province', 'city', 'isp', 'types', 'city_code')
+    search_fields = ['num', 'province', 'city']
+
+
 admin.site.register(ImportLog, ImportLogAdmin)
 admin.site.register(BatchEmail, BatchEmailAdmin)
 admin.site.register(SmsLog, SmsLogAdmin)
 admin.site.register(WechatMsgLog, WechatLogAdmin)
+admin.site.register(MobileLocation, MobileLocationAdmin)
