@@ -85,8 +85,10 @@ class MobileLocationResource(PartHeaderMixin, LogMixin, resources.ModelResource)
                           )
 
     def skip_row(self, instance, original):
-        return int(instance.num) == int(original.num)
-        # return super().skip_row(instance, original)
+        if instance.num and original.num:
+            return int(instance.num) == int(original.num)
+        else:
+            return super().skip_row(instance, original)
 
     class Meta:
         model = MobileLocation
