@@ -80,6 +80,7 @@ def vhall_api_md5_sign(request):
 
 @ajax_required(auth=False, method='POST')
 def vhall_js_md5_sign(request):
-    fs = ['roomid', 'account', 'username']
-    params = {k: v for k, v in request.POST.items() if k in fs}
+    # fs = ['roomid', 'account', 'username']
+    # if k in fs
+    params = {k: v for k, v in request.POST.items()}
     return JsonResponse(vhall.js_md5_sign(params))
